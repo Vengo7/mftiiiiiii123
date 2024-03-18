@@ -1,0 +1,27 @@
+import cv2
+import numpy as np
+
+cam = cv2.VideoCapture(0)
+
+success, frame = cam.read()
+frame[:, :, 0:2] = [300, 150]
+if not success:
+    print("Failed to capture image")
+    cam.release()
+    cv2.destroyAllWindows()
+    exit()
+
+print(success, frame.shape, type(frame[10, 20, 1]))
+wide = frame.shape[1]
+height = frame.shape[0]
+print(f"Разрешение {wide} на {height}")
+
+
+square_side = 100
+
+start_x = wide // 2 - square_side // 2
+start_y = height // 2 - square_side // 2
+
+while True:
+
+    success, frame = cam.read()
